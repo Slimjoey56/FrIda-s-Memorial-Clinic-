@@ -1,0 +1,256 @@
+:root {
+  --primary: #0d6efd;
+  --dark: #0b2239;
+  --muted: #6c757d;
+  --bg: #f8f9fb;
+  --topbar-height: 48px;
+  --navbar-height: 76px; /* Increased for mobile */
+  --total-header-height: 124px; /* topbar + navbar combined */
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  background: var(--bg);
+  color: #1f2d3d;
+  padding-top: var(--total-header-height); /* Space for fixed topbar + navbar */
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Topbar */
+.topbar {
+  font-size: .9rem;
+  background: var(--dark);
+  color: #d8e3f1;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: var(--topbar-height);
+  z-index: 1030 !important;
+}
+
+.topbar a {
+  color: #cfe2ff;
+}
+
+.topbar .bi {
+  opacity: .85;
+}
+
+/* Navbar - ensure it stays fixed below topbar */
+.navbar {
+  position: fixed !important;
+  top: var(--topbar-height) !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1020 !important;
+  min-height: var(--navbar-height);
+  border-bottom: 1px solid #e9ecef !important;
+}
+
+/* Hero */
+.hero {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem; /* Additional spacing after fixed headers */
+  background:     
+    radial-gradient(1200px 400px at -10% -30%, rgba(13,110,253,.15), transparent 60%),
+    radial-gradient(800px 400px at 110% 130%, rgba(13,110,253,.2), transparent 60%),
+    linear-gradient(180deg, #fff 0%, #f5f9ff 100%);
+}
+
+.hero h1 {
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+
+.hero-img {
+  width: 100%; 
+  max-width: 560px; 
+  border-radius: 16px; 
+  box-shadow: 0 25px 60px rgba(13,110,253,.25);
+  transform: perspective(1200px) rotateY(-8deg) rotateX(2deg);
+  transition: transform .6s ease;
+}
+
+.hero-img:hover {
+  transform: perspective(1200px) rotateY(-2deg) rotateX(0deg) scale(1.01);
+}
+
+/* Cards */
+.service-card {
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+  background: #fff;
+}
+
+.service-card:hover {
+  transform: translateY(-6px); 
+  box-shadow: 0 18px 40px rgba(13,110,253,.15);
+}
+
+.service-card .thumb {
+  height: 180px; 
+  object-fit: cover;
+}
+
+/* Footer */
+.footer a {
+  color: #b9d1ff;
+}
+
+.footer {
+  background: var(--dark); 
+  color: #d9e6ff;
+}
+
+.footer .brand {
+  font-weight: 800;
+}
+
+/* Contact form */
+.form-control:focus {
+  box-shadow: 0 0 0 .25rem rgba(13,110,253,.15); 
+  border-color: var(--primary);
+}
+
+/* Util */
+.section-title {
+  font-weight: 800;
+}
+
+/* MODAL/OVERLAY POSITIONING FIX */
+/* Position the modal overlay to start below the fixed navbar */
+.modal-overlay {
+  position: fixed;
+  top: var(--total-header-height) !important; /* Start below topbar + navbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  overflow-y: auto; /* Allow scrolling in the overlay itself */
+  z-index: 100; /* Lower z-index, but positioned below navbar */
+  padding: 2rem 0 6rem 0; /* Increased top and bottom padding for more scroll space */
+}
+
+.modal-container {
+  position: relative;
+  max-width: 80vw; /* Reduced from 90vw */
+  min-height: auto; /* Remove height restrictions */
+  max-height: none; /* Remove max-height limit */
+  margin: 0 auto 4rem auto; /* Increased bottom margin for more scroll space */
+  overflow: visible; /* Allow content to extend */
+  /* Ensure smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+/* Make sure modal content is scrollable */
+.modal-content-wrapper {
+  min-height: 100%;
+  padding: 1rem;
+}
+
+/* Add padding to bottom so contact section is fully visible */
+.modal-content {
+  padding-bottom: 4rem; /* Increased from 2rem */
+}
+
+/* Ensure contact section is visible and clickable */
+.contact-section {
+  margin-top: 2rem;
+  margin-bottom: 3rem; /* Increased bottom margin */
+}
+
+/* Responsive modal sizing */
+@media (max-width: 768px) {
+  .modal-container {
+    max-width: 95vw; /* Larger on mobile for better use of space */
+    max-height: calc(100vh - var(--total-header-height) - 2rem);
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-container {
+    max-width: 98vw;
+    margin: 0.5rem auto;
+  }
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 991.98px) {
+  :root {
+    --topbar-height: 44px;
+    --navbar-height: 80px; /* More space for collapsed navbar */
+    --total-header-height: 124px;
+  }
+  
+  body {
+    padding-top: var(--total-header-height);
+  }
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --topbar-height: 42px;
+    --navbar-height: 70px;
+    --total-header-height: 112px;
+  }
+  
+  .hero {
+    min-height: 60vh;
+    padding: 2rem 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  :root {
+    --topbar-height: 40px;
+    --navbar-height: 68px;
+    --total-header-height: 108px;
+  }
+  
+  .topbar {
+    font-size: .8rem;
+  }
+}
+
+/* Ensure main content starts after fixed headers */
+main, .main-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix for any overlapping issues */
+.container, .container-fluid {
+  position: relative;
+  z-index: 1;
+}
+
+/* Navbar collapse fix for mobile */
+.navbar-collapse {
+  max-height: calc(100vh - var(--total-header-height));
+  overflow-y: auto;
+}
+
+/* Additional spacing for first content section */
+section:first-of-type,
+.hero,
+.main-content > *:first-child {
+  margin-top: 0;
+  padding-top: 1rem;
+}
